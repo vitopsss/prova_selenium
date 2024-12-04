@@ -1,0 +1,75 @@
+{
+  "id": "12345abc-defg-6789-hijk-1234567890lm", // Identificador único do arquivo de teste.
+  "version": "2.0", // Versão do formato do script de teste.
+  "name": "wikipedia_test", // Nome do script de teste.
+  "url": "https://www.wikipedia.org", // URL base para o teste.
+  "tests": [{ // Início da definição dos testes.
+    "id": "test123-wikipedia", // Identificador único deste teste.
+    "name": "teste_busca", // Nome do teste.
+    "commands": [{ // Lista de comandos que o teste irá executar.
+      "id": "cmd1-open-site", // Identificador do comando.
+      "comment": "Abrir a página inicial da Wikipedia", // Comentário que explica a função do comando.
+      "command": "open", // Comando para abrir uma URL.
+      "target": "/", // Caminho relativo para abrir (neste caso, a página inicial).
+      "targets": [], // Alvos alternativos (vazio, pois `open` não precisa).
+      "value": "" // Sem valor adicional para o comando.
+    }, {
+      "id": "cmd2-set-window-size", // Identificador do comando.
+      "comment": "Definir o tamanho da janela", // Comentário explicando o comando.
+      "command": "setWindowSize", // Comando para ajustar o tamanho da janela do navegador.
+      "target": "1440x900", // Dimensões da janela: largura x altura (em pixels).
+      "targets": [], // Nenhum alvo alternativo.
+      "value": "" // Sem valor adicional.
+    }, {
+      "id": "cmd3-selecionar-idioma", // Identificador do comando.
+      "comment": "Selecionar o idioma português", // Explica que este comando muda o idioma para português.
+      "command": "click", // Comando para clicar em um elemento.
+      "target": "css=a#js-link-box-pt", // Localizador CSS do botão de idioma.
+      "targets": [ // Alternativas para encontrar o elemento caso o CSS falhe.
+        ["css=a#js-link-box-pt", "css:finder"], // Localizador CSS.
+        ["xpath=//a[@id='js-link-box-pt']", "xpath:attributes"] // Localizador XPath.
+      ],
+      "value": "" // Sem valor adicional.
+    }, {
+      "id": "cmd4-digitar-busca", // Identificador do comando.
+      "comment": "Digitar o termo de busca 'Inteligência Artificial'", // Explica o comando: inserir texto no campo de busca.
+      "command": "type", // Comando para digitar texto em um campo.
+      "target": "css=input#searchInput", // Localizador CSS do campo de busca.
+      "targets": [ // Alternativas para localizar o campo.
+        ["css=input#searchInput", "css:finder"], // Localizador CSS.
+        ["xpath=//input[@id='searchInput']", "xpath:attributes"] // Localizador XPath.
+      ],
+      "value": "Inteligência Artificial" // Valor a ser digitado no campo de busca.
+    }, {
+      "id": "cmd5-executar-busca", // Identificador do comando.
+      "comment": "Clicar no botão de busca", // Explica que o comando clica no botão de busca.
+      "command": "click", // Comando para clicar em um elemento.
+      "target": "css=button[type='submit']", // Localizador CSS do botão de busca.
+      "targets": [ // Alternativas para localizar o botão.
+        ["css=button[type='submit']", "css:finder"], // Localizador CSS.
+        ["xpath=//button[@type='submit']", "xpath:attributes"] // Localizador XPath.
+      ],
+      "value": "" // Sem valor adicional.
+    }, {
+      "id": "cmd6-validar-titulo", // Identificador do comando.
+      "comment": "Validar que o título da página corresponde ao termo buscado", // Explica que o comando verifica se o título está correto.
+      "command": "assertText", // Comando para verificar texto.
+      "target": "css=h1#firstHeading", // Localizador CSS do título principal da página.
+      "targets": [ // Alternativas para localizar o título.
+        ["css=h1#firstHeading", "css:finder"], // Localizador CSS.
+        ["xpath=//h1[@id='firstHeading']", "xpath:attributes"] // Localizador XPath.
+      ],
+      "value": "Inteligência artificial" // Texto esperado no título.
+    }]
+  }],
+  "suites": [{ // Conjunto de testes a serem executados.
+    "id": "suite-wikipedia", // Identificador único da suíte de testes.
+    "name": "Suite Busca Wikipedia", // Nome da suíte de testes.
+    "persistSession": false, // Indica que a sessão do navegador não será persistida entre os testes.
+    "parallel": false, // Indica que os testes não serão executados em paralelo.
+    "timeout": 300, // Tempo limite para o teste (em segundos).
+    "tests": ["test123-wikipedia"] // Lista de IDs de testes incluídos na suíte.
+  }],
+  "urls": ["https://www.wikipedia.org/"], // Lista de URLs relacionadas ao teste.
+  "plugins": [] // Plugins adicionais (nenhum definido neste caso).
+}
